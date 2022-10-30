@@ -14,10 +14,6 @@ user_guide_src/cilexer/pycilexer.egg-info/*
 application/logs/*
 !application/logs/index.html
 !application/logs/.htaccess
-# */vendors/
-# vendors/
-/uploads/
-*/uploads/
 /errors/
 */errors/
 images/sell_out_report
