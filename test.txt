@@ -1,0 +1,101 @@
+all method post
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data
+Parameter
+form_name=SELLOUT_REPORT&type=category
+{"statuscode":200,"message":"Data get successfully","data":[{"category":"AIR FRYER"},{"category":"AIR PURIFIER"},{"category":"BI COFFEE MACHINE"},{"category":"BI HOB"},{"category":"BI HOOD"},{"category":"BI MICROWAVE"},{"category":"BI OVEN"},{"category":"BI REFRIGERATOR"},{"category":"COOKER"},{"category":"DEHUMIDIFIER"},{"category":"DISHWASHER"},{"category":"DRYER"},{"category":"FLOOR CARE"},{"category":"PORTABLE A\/C"},{"category":"REFRIGERATOR"},{"category":"SPLIT A\/C"},{"category":"WASHING MACHINE"},{"category":"WASHING MACHINE DRYER"},{"category":"WATER DISPENSER"},{"category":"WATER PURIFIER"},{"category":"WINDOW A\/C"}]}
+
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data
+Parameter
+form_name=SELLOUT_REPORT&type=brand&category=COOKER
+
+{"statuscode":200,"message":"Data get successfully","data":[{"brand_name":"BOMPANI"},{"brand_name":"BOSCH"},{"brand_name":"ELECTROLUX"},{"brand_name":"FRIGIDAIRE"},{"brand_name":"GLEMGAS"},{"brand_name":"MIDEA"},{"brand_name":"SIEMENS"},{"brand_name":"TECHNOGAS"},{"brand_name":"WHIRLPOOL"}]}
+
+
+
+
+SELLOUT_REPORT
+STOCK_OUT
+DISPLAYCOUNT_REPORT
+DISPLAY_SHARE
+SPECIAL_FIXTURE_COUNT
+BRAND_PROMOTER_COUNT
+PRICE_TRACKER
+MARKET_SENSING
+360 STORE IMAGE
+DIPLAY&DEPLOYMENT TRACKER
+VOC
+MARKET_ISSUES_OPPORTUNITIES
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data
+Parameter
+form_name=PRICE_TRACKER&type=segment&category=DISHWASHER&brand_name=BOSCH
+
+{"statuscode":200,"message":"Data get successfully","data":[{"segment":"13 PS"}]}
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data
+Parameter
+form_name=PRICE_TRACKER&type=model_number&category=DISHWASHER&brand_name=BOSCH
+
+{"statuscode":200,"message":"Data get successfully","data":[{"model_number":"SMS46NI10M"}]}
+
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/capturedata
+'outlet_name','region','date','add_more_array','user_id'       
+
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data2
+type: display_type
+{"statuscode":200,"message":"Data get successfully","data":[{"display_type":"COMMON DISPLAY"},{"display_type":"SPECIAL DISPLAY"}]}
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data2
+type: fixture_type
+{"statuscode":200,"message":"Data get successfully","data":[{"fixture_type":"INSTORE BRANDING"},{"fixture_type":"ISLAND DISPLAY"},{"fixture_type":"MDA ENDCAP"},{"fixture_type":"OUTDOOR BRANDING"},{"fixture_type":"PILLAR FIXTURE\r\n"},{"fixture_type":"SDA ENDCAP"},{"fixture_type":"SHOP IN SHOP"},{"fixture_type":"WALL FIXTURE"},{"fixture_type":"WINDOW DISPLAY"}]}
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data2
+type: activity_type
+{"statuscode":200,"message":"Data get successfully","data":[{"activity_type":"GONDOLA"},{"activity_type":"GV PROMO"},{"activity_type":"NEW SPECIAL DISPLAY"},{"activity_type":"OTHERS"},{"activity_type":"ROADSHOW"}]}
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data2
+type: voc_type
+{"statuscode":200,"message":"Data get successfully","data":[{"voc_type":"COMPLAINTS"},{"voc_type":"FEEDBACKS"},{"voc_type":"SUGGESTIONS"},{"voc_type":"WOULD LIKE SUBSCRIBE TO RECEIVE PROMOTIONAL SM & EMAILS"}]}
+
+type:promoter_type
+type:condition_fixture
+
+
+
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_region_with_outlet
+outlet_id: 1
+{"statuscode":200,"message":"Data get successfully","data":{"id":"3","region":"test2"}}
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/user_outlet_list
+method:post
+user_id:25
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/attendance
+method:post
+user_id:25
+{"statuscode":200,"message":"Data get successfully","data":{"date":"5\/03\/2022","planned":"50","visited":"70","visit_percentage":"80","outlet_array":[{"outlet_name":"test1","region":"test2","visit_status":"Visited"},{"outlet_name":"test2","region":"test3","visit_status":"Pending"}]}}
+
+
+
+
+
+
+
+http://162.144.65.120/~procopbn/nichefas/api/Work_api/get_master_data_segment
+Parameter
+form_name=PRICE_TRACKER&type=segment&category=DISHWASHER&brand_name=BOSCH
+
