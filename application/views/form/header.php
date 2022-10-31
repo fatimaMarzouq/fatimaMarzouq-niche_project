@@ -130,6 +130,12 @@ html, body, .main{
 .btn-md {
     padding: 10px 30px;
 }
+.top-padding {
+    padding-top: 60px;
+}
+.justify-content-center{
+  justify-content: center;
+}
 </style>
 
   </head>

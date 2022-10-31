@@ -102,18 +102,12 @@ background-color: #055798;
 }
 }
 </style>
-    <div class="col-md-12 col-sm-12 col-xs-12">
+<div class="top-padding">
       <div class="x_panel">
-        <!-- <div class="x_title">
-         
-          
-          
-        <div class="clearfix"></div>
-        </div>  -->
         <div class="x_content">
           <div class="grid-body ">
             <div class="" style="margin-bottom:25px;">
-
+            
                 <div class="container">
                   <div class="row">
                     <div class="col-md-2 out_one">Outlet Name:</div>
@@ -225,16 +219,6 @@ background-color: #055798;
     
   </tr>
   <?php } } ?>
-  <!--<tr>-->
-  <!--  <td>Select the Cat.</td>-->
-  <!--  <td>Select the Brand</td>-->
-  <!--  <td>Select the Model No.</td>-->
-  <!--   <td>Tick Box</td>-->
-  <!--  <td>Num.input</td>-->
-  <!--  <td>Num.input By user</td>-->
-  <!--  <td>Num.input By user</td>-->
-    
-  <!--</tr>-->
   
   
 </table>
@@ -251,6 +235,6 @@ background-color: #055798;
         </div>
       </div>
     </div>
-
+ 
 
 

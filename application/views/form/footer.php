@@ -1,4 +1,4 @@
-        <footer style="margin-left:0;">
+        <!-- <footer style="margin-left:0;">
 
           <div class="pull-right">
 
@@ -8,7 +8,7 @@
 
           <div class="clearfix"></div>
 
-        </footer>
+        </footer> -->
 
         <!-- /footer content -->
 
