@@ -104,7 +104,7 @@ background-color: #055798;
 </style>
     <div class="top-padding">
       <div class="x_panel">       
-<form method="post" action="<?=site_url('form/add_sellout')?>">               
+<form method="post" action="<?=site_url('form/add_sellout')?>" enctype="multipart/form-data">               
           
   <!-- <div class="x_title"> 
 <div class="clearfix"></div>
@@ -123,6 +123,7 @@ background-color: #055798;
           </div>
         </div>
         <input value="<?php if($result['account_name']) echo $result['account_name'];?>" type="hidden" class="form-control" name="account_name">
+        <input value="<?php if($id) echo $id;?>" type="hidden" class="form-control" name="id">
         <div class="container new_row1">
           <div class="row">
             <div class="col-md-2 out_one2">Date:</div>
@@ -149,7 +150,7 @@ background-color: #055798;
     <tr class="report">
     <td>
       <select class="form-control" name="category-<?php echo $i?>" id="category">
-        <option>Choose Category</option>
+        <option value="" disabled selected>Choose Category</option>
       <?php 
       if($categories) {
         foreach($categories as $category){
@@ -162,17 +163,17 @@ background-color: #055798;
   </td>
     <td>
       <select class="form-control" name="brand-<?php echo $i?>" id="brand">
-        <option>Choose Brand</option>
+        <option value="" disabled selected>Choose Brand</option>
     </select>
   </td>
     <td>
       <select class="form-control" name="model-<?php echo $i?>" id="model">
-        <option>Choose Model Number</option>
+        <option value="" disabled selected>Choose Model Number</option>
     </select>
   </td>
     <td><input type="number" class="form-control" min="0" step="1" name="quantity-<?php echo $i?>"></td>
-    <td><input type="number" class="form-control" min="0" step="0.01" class="selling_price" name="selling_price-<?php echo $i?>"></td>
-    <td><input type="number" class="form-control" min="0" step="0.01" name="offer_price-<?php echo $i?>"></td>
+    <td><input type="number" class="form-control selling_price" min="0" step="0.01" name="selling_price-<?php echo $i?>"></td>
+    <td><input type="number" class="form-control" min="0" step="0.01" name="offer-<?php echo $i?>"></td>
   </tr>
   <?php } ?>
   
@@ -207,7 +208,7 @@ background-color: #055798;
                    <td class="sales_one">Invoice image</td>
                    <td class="sales_two">
                     <label for="invoice_image">
-                    <img src="<?= site_url()?>images/camera-icon.png">
+                    <img id="blah" src="<?= site_url()?>images/camera-icon.png">
                    <input type="file" class="form-control" name="invoice_image" id="invoice_image" style="display:none">
                   </label>
                    </td>
@@ -268,7 +269,13 @@ background-color: #055798;
       </div>
     </div>
 <script>
-      
+      invoice_image.onchange = evt => {
+  const [file] = invoice_image.files
+  if (file) {
+    blah.src = URL.createObjectURL(file)
+  }
+  $("#blah").css("width","224px")
+}
   $( document ).ready(function() {
     $( ".report" ).each(function(){
       let parent=$(this)

@@ -96,6 +96,9 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style type="text/css">
+  img#blah {
+    cursor: pointer;
+}
   	ul.msgs-list {
     font-size: 24px;
     list-style: none;

@@ -201,10 +201,11 @@ background-color: #055798;
      <th class="cate_one">Offer Price</th>
   </tr>
    <?php if($result['add_more_array']){
+    // print_r($result['add_more_array']);
        $add_more_array = unserialize(base64_decode($result['add_more_array']));
-       //echo '<pre>';print_r($add_more_array);
-        foreach($add_more_array as $resultm){
-            $result = json_decode($resultm,true);
+      //  echo '<pre>';print_r($add_more_array); echo '</pre>';
+        foreach($add_more_array as $result){
+            // $result = json_decode($resultm,true);
             //echo '<pre>';print_r($add_more_ar);
            
             ?>

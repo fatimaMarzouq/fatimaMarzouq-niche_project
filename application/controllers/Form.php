@@ -11,6 +11,28 @@ class Form extends CI_Controller
         $this->load->library('session');
 
     }
+    function upload_image($type, $file, $label) {
+        //echo realpath($this->target_folder . $type);
+                $config['upload_path'] =realpath($this->target_folder . $type);
+                $config['allowed_types'] = 'gif|jpg|png|jpeg';
+                $response = array();
+        
+                $this->load->library('upload', $config);
+                $this->upload->initialize($config);
+        
+                if (!$this->upload->do_upload($label)) {
+                  
+                    $response = array($this->upload->display_errors(), 0, NULL);
+                } else {
+        
+                    $fileInfo = $this->upload->data();
+                    $postData['uploadDocUrl'] = base_url() . $this->target_folder . $type . "/" . $fileInfo ['file_name'];
+                    chmod(realpath($this->target_folder . $type . "/" . $fileInfo ['file_name']), 0777);
+        
+                    $response = array($this->upload->display_errors(), 1, $fileInfo ['file_name']);
+                }
+                return $response;
+            }
     public function get_pagination_config()
     {
         $config = array();
@@ -49,13 +71,66 @@ class Form extends CI_Controller
     {
         $this->load->view('form/form_login');
     }
+    public function login_check($email,$password)
+
+	{
+
+		$this->db->where('email',$email);
+
+		$this->db->where('password',$password);
+
+		$query = $this->db->get('tbl_admin');
+
+		
+
+
+
+		if($query->num_rows() == 1)  
+
+		{
+
+
+
+			$result=$query->result();
+            if($result[0]->role != 2 && $result[0]->type == 1){
+    			$sessiondata = array(
+    
+    									'id'  =>$result[0]->id,
+    
+    									'username'  =>$result[0]->username,
+    
+    									'email'  =>$result[0]->email,
+    
+    									'role'  =>$result[0]->role,
+    
+    									'image'  =>$result[0]->image             
+    
+    			                    );
+    
+    			$this->session->set_userdata($sessiondata);
+    
+    			return $result[0]->id;
+            }else{
+                return '-1';
+            }
+		} 
+
+		else
+
+		{		
+
+     		return false;
+
+		}
+
+	}
     public function form_login_check()
     {
         $table = 'tbl_admin';
         $usermail = $this->input->post('email');
         $passwords = $this->input->post('password');
         $password = md5($passwords);
-        $result = $this->Common_model->login_check($usermail, $password, $table);
+        $result = $this->login_check($usermail, $password);
 
         if ($result > 0) {
 
@@ -185,6 +260,7 @@ class Form extends CI_Controller
         $data['categories']=$unique_values_by_key;
         $data['user_target']=$this->Common_model->getData("tbl_admin", "target", array('id' => $this->session->userdata('id')), null, null, null, null, false)["target"];
         $data['main'] = 'form/sellout_form';
+        $data["id"]=$id;
         $this->load->view('form/template', $data);
     }
     public function get_brand(){
@@ -195,6 +271,7 @@ class Form extends CI_Controller
     }
     public function get_model(){
         $brand=$_POST["brand"];
+        $category=$_POST["category"];
         $models= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "model_number", array('brand_name' => $brand)), 'model_number'));
 
         echo json_encode($models);
@@ -204,7 +281,6 @@ class Form extends CI_Controller
         $outlet_name=$_POST["outlet_name"];
         $account_name=$_POST["account_name"];
         $name=$_POST["name"];
-        $username=$this->session->userdata('username');
         $number=$_POST["contact_number"];
         $email=$_POST["email"];
         $customer_feed=$_POST["feedback"];
@@ -213,8 +289,10 @@ class Form extends CI_Controller
         $analysis_per=$_POST["analysis_per"];
         $add_more_array=array();
         $user_id = $this->session->userdata('id');
+        $username=$this->session->userdata('username');
         for($i=1;$i<=4;$i++){
-            array_push($add_more_array,
+            if(isset($_POST["category"."-".$i])){
+                array_push($add_more_array,
             [
                 "category"=>$_POST["category"."-".$i],
                 "brand"=>$_POST["brand"."-".$i],
@@ -224,7 +302,19 @@ class Form extends CI_Controller
                 "offer"=>$_POST["offer"."-".$i],
             ]
         );
+            }
+            
         }
+                $image_array = array();
+                if (!empty($_FILES)) {
+                    $image_file_name = $_FILES['invoice_image']['name'];
+                  
+                    list($msg, $flag, $imageUrl) = $this->upload_image("uploads/".$type, $_FILES, "invoice_image");
+                    if(!empty($flag) && empty($msg)){
+                        $dataVal['image_url'] = $imageUrl;
+                        array_push($image_array,base_url()."uploads/".$imageUrl);
+                    }
+                }
         $save_product= array(
             
             'outlet_name'    => $outlet_name,       
@@ -248,7 +338,7 @@ class Form extends CI_Controller
 
              'analysis_per'    => $analysis_per,       
 
-            // 'image_array'            => $image_array,
+            'image_array'            => base64_encode(serialize($image_array)),
 
             'add_more_array'                 => base64_encode(serialize($add_more_array)),
             'add_more_array_count' => count($add_more_array),
@@ -260,6 +350,9 @@ class Form extends CI_Controller
 
         $this->db->insert('sellout',$save_product);
 		$insert_id = $this->db->insert_id();
+        $result=$this->Common_model->update_data(array(
+            'visit_status'    => "Visited",
+        ),"tbl_masterdata3",$_POST["id"]);
 		redirect('form/sellout_list');
     }
 }
