@@ -23,9 +23,9 @@ defined('BASEPATH') OR exit('No direct script access allowed');
 | a PHP script and you can easily do that on your own.
 |
 */
-$config['base_url'] = 'http://localhost/public_html/development/';
+$config['base_url'] = 'http://localhost/niche_project/';
 
-$config['site_url'] = 'http://localhost/public_html/development/';
+$config['site_url'] = 'http://localhost/niche_project/';
 
 /*
 |--------------------------------------------------------------------------

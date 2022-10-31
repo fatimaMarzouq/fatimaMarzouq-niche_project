@@ -17,7 +17,7 @@
 
 
 
-            <title>NICHEFAS </title>
+            <title>NICHEFAS FORM</title>
 
 
  <!-- Google Font: Source Sans Pro -->
@@ -253,7 +253,7 @@
             </div> 
 
 
-      <form action="<?=site_url('welcome/form_login_check')?>" method="post">
+      <form action="<?=site_url('form/form_login_check')?>" method="post">
         <div class="input-group mb-3">
           <input type="text" class="form-control" required name="email"  placeholder="Username">
           <div class="input-group-append">

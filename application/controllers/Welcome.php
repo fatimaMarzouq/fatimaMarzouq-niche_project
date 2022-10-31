@@ -10,16 +10,16 @@ class Welcome extends CI_Controller {
         $this->load->library('session'); 
 
     }
-   
     public function logout(){
         session_destroy();
         $this->session->set_flashdata('msg','Logout Successfully');
         redirect('welcome/login');
     }
-
+    
     public function login(){
         $this->load->view('common/login');  
     }
+    
     public function registration(){
         $this->load->view('common/registration');  
     }
@@ -48,7 +48,6 @@ class Welcome extends CI_Controller {
             redirect(base_url('welcome/login'));
         }
     }
-
     
     public function index()
     {
