@@ -103,7 +103,8 @@ class Form extends CI_Controller
     
     									'role'  =>$result[0]->role,
     
-    									'image'  =>$result[0]->image             
+    									'image'  =>$result[0]->image,
+                                        'language'=>"en"           
     
     			                    );
     
@@ -353,6 +354,16 @@ class Form extends CI_Controller
         $result=$this->Common_model->update_data(array(
             'visit_status'    => "Visited",
         ),"tbl_masterdata3",$_POST["id"]);
-		redirect('form/sellout_list');
+		redirect('form/sellout_detail/'.$_POST["id"]);
+    }
+    public function switch_language(){
+        $language = $this->session->userdata('language');
+        if($language=="en"){
+            $this->session->set_userdata('language',"ar");
+        }
+        if($language=="ar"){
+            $this->session->set_userdata('language',"en");
+        }
+        redirect(($_SERVER['HTTP_REFERER']));
     }
 }

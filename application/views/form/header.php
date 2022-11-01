@@ -10,10 +10,12 @@
 // $username=$this->session->userdata('username');        
 
 // }
+$language = $this->session->userdata('language');
+
 ?>
 <!DOCTYPE html>
 
-<html lang="en">
+<html lang="<?= $language ?>" dir="<?php if($language=="ar") echo "rtl"; else echo "ltr"; ?>">
 
   <head><meta http-equiv="Content-Type" content="text/html; charset=utf-8">
 
@@ -96,6 +98,23 @@
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 
 <style type="text/css">
+  @import url('https://fonts.googleapis.com/css2?family=Cairo:wght@200;300;400;500;600;700;800;900;1000&display=swap');
+  <?php if($language=="ar") echo "body,.morris-hover.morris-default-style,.view p,.tagsinput input,span.tag{font-family: Cairo !important;}"; ?>
+   .font-bold{
+    font-weight:900 !important;
+   }
+   .font-cairo{
+    font-family:Cairo !important
+   }
+   .text-black {
+    color: black;
+}
+.gap-2 {
+    gap: 1em;
+}
+.gap-4 {
+    gap: 2em;
+}
   img#blah {
     cursor: pointer;
 }
@@ -140,6 +159,7 @@ html, body, .main{
   justify-content: center;
 }
 #disabled-overlay{
+  display:none;
     position: absolute;        
     top: 0;
     left: 0;
@@ -148,6 +168,177 @@ html, body, .main{
     opacity: 0;
     height: 100%;
     width: 100%;
+}
+.new_row1
+  {
+    margin-top: 16px;
+  }
+  table {
+  border-collapse: collapse;
+  width: 100%;
+}
+
+td, th {
+  border: 1px solid #dddddd;
+  text-align: inherit;
+  padding: 8px;
+}
+
+/*tr:nth-child(even) {
+  background-color: #dddddd;
+}*/
+.sales_one
+{
+  width: 30% ! important;
+}
+.sales_two
+{
+  text-align: center ! important;
+}
+.ditails_one
+{
+  margin-top: 25px;
+  color: #000;
+    font-weight: bold;
+}
+.out_one
+{
+  width: 11% ! important;
+  color: #000;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.out_one1
+{
+  width: 7% ! important;
+  color: #000;
+    font-size: 15px;
+    font-weight: bold;
+}
+
+.out_one2
+{
+  width: 5% ! important;
+  color: #000;
+    font-size: 15px;
+    font-weight: bold;
+}
+.input_one
+{
+  border:none ! important;
+}
+.cate_one
+{
+  font-size: 14px;
+  font-weight: bold;
+  color: #000;
+}
+.new_button
+{
+background-color: #055798;
+    color: #fff;
+    height: 33px;
+    width: 150px;
+    border-radius: 4px;
+    border: none;
+}
+.center_one
+{
+  text-align: center;
+    margin-top: 40px;
+}
+
+@media screen and (max-width: 768px)
+{
+  .out_one
+{
+  width: 100% ! important;
+}
+
+.out_one1
+{
+  width: 100% ! important;
+}
+
+.out_one2
+{
+  width: 100% ! important;
+}
+.new_scro
+{
+  width: 100% !important;
+    overflow-x: scroll;
+}
+}
+.newicon_one
+  {
+    display: initial ! important;
+    width: 250px ! important;
+
+  }
+  .form-group .btn {
+    margin-bottom: 4px ! important;
+}
+.export_one
+{
+    background-color: #337ab7 ! important;
+    border: #2e6da4 ! important;
+    float: right;
+    height: 31px;
+    width: 60px;
+    color: #fff;
+    border-radius: 4px;
+}
+.go_one
+{
+    margin-left: 19px;
+    background-color: #337ab7 ! important;
+    border: #2e6da4 ! important;
+    height: 25px;
+    width: 31px;
+    color: #fff;
+    border-radius: 4px;
+}
+.end_one
+{
+  margin-left: 28px;
+  margin-top: 20px;
+}
+.scend_one
+{
+  margin-top: 20px;
+}
+.date_one
+{
+  padding: 6px 12px;
+}
+.new_bairth
+{
+  padding: 6px 12px;
+}
+
+@media screen and (max-width: 768px)
+{
+  .newicon_one
+  {
+    width: 150px ! important;
+    margin-left: 10px
+  }
+  .scend_one
+  {
+    margin-left: 10px;
+  }
+  .end_one
+  {
+    margin-left: 10px;
+  }
+  .new_bairth
+  {
+    margin-left: 6px;
+   
+
+  }
 }
 </style>
 
