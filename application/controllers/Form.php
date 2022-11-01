@@ -201,7 +201,7 @@ class Form extends CI_Controller
             $data['max_count'] = 0;
         }
 
-        $select = "id,outlet_name,account_name,region,date,visit_status";
+        $select = "id,outlet_name,account_name,region,date,visit_status,(select longitude from tbl_outlet_master where outlet_name=tbl_masterdata3.outlet_name) as longitude,(select latitude from tbl_outlet_master where outlet_name=tbl_masterdata3.outlet_name) as latitude";
         $table = 'tbl_masterdata3';
         $con = "1=1 and `user` in ('" . $this->session->userdata('email')."','". $this->session->userdata('username') . "') ";
         $invoice_data_val = $this->Common_model->getPaginationList($start, $table, $select, $con, $orderBy, $limit);

@@ -139,6 +139,16 @@ html, body, .main{
 .justify-content-center{
   justify-content: center;
 }
+#disabled-overlay{
+    position: absolute;        
+    top: 0;
+    left: 0;
+    bottom:0;
+    right: 0;
+    opacity: 0;
+    height: 100%;
+    width: 100%;
+}
 </style>
 
   </head>
