@@ -18,7 +18,7 @@
                   <th class="sortable" id="outlet_name"><?= $this->lang->line('outlet_name');?></th>
                   <th class="sortable" id="region"><?= $this->lang->line('region');?></th>
                   <th class="sortable" id="name"><?= $this->lang->line('name');?></th>
-                  <th class="cate_one"><?= $this->lang->line('visit_status');?></th>     
+                  <th><?= $this->lang->line('visit_status');?></th>     
                </tr>
             </thead>
            
