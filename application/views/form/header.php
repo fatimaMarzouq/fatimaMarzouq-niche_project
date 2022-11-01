@@ -140,6 +140,10 @@ footer {
     justify-content: flex-end;
     direction:ltr;
 }
+td, th {
+    padding: 0;
+    min-width: 174px;
+}
 .text-gray{
   color: #EDEDED;
 }
