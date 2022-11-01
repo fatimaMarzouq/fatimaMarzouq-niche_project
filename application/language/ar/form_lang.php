@@ -36,6 +36,10 @@ $lang['user_sales'] = 'مبيعات العميل';
 $lang['sales_analysis'] = 'Sales Analysis';
 $lang['save'] = 'حفظ';
 $lang['back'] = 'الرجوع الى القائمة الرئيسية';
+
 $lang['logout'] = 'تسجيل الخروج';
 $lang['lang'] = 'English';
+
+$lang['newspapper'] = 'اعلانات';
+$lang['ok'] = 'موافق';
 

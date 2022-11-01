@@ -39,3 +39,7 @@ $lang['back'] = 'Back to Main Menu';
 
 $lang['logout'] = 'logout';
 $lang['lang'] = 'العربية';
+
+$lang['newspapper'] = 'Newspapper from reporting manager';
+$lang['ok'] = 'OK';
+
