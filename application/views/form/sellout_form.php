@@ -12,7 +12,7 @@
         <input value="<?php if($result['account_name']) echo $result['account_name'];?>" type="hidden" class="form-control" name="account_name">
         <input value="<?php if($result['outlet_name']) echo $result['outlet_name'];?>" type="hidden" class="form-control" name="outlet_name">
         <input value="<?php if($id) echo $id;?>" type="hidden" class="form-control" name="id">
-       <?php if($result['region']) echo $result['region'];?> <input value="<?php if($result['region']) echo $result['region'];?>" type="hidden" class="form-control" name="region">
+        <input value="<?php if($result['region']) echo $result['region'];?>" type="hidden" class="form-control" name="region">
             <div class="container w-100">
                     <div class="d-flex gap-2">
                       <div class="font-bold text-black"><?= $this->lang->line('outlet_name');?>:</div>
