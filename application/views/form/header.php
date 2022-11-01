@@ -134,6 +134,12 @@ footer {
     left: 0;
     right: 0;
 }
+.navbar-nav {
+    margin: 7.5px 16px;
+    display: flex;
+    justify-content: flex-end;
+    direction:ltr;
+}
 .text-gray{
   color: #EDEDED;
 }
