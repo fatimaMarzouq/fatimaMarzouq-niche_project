@@ -349,6 +349,33 @@ background-color: #055798;
    
 
   }
+  table.form-table td, table.form-table th {
+    border-color: transparent;
+}
+.flex-md-column{
+  flex-direction:column;
+}
+img#blah {
+    width: 50px;
+}
+}
+.justify-content-around {
+    justify-content: space-around;
+}
+.flex-column{
+  flex-direction:column;
+}
+.w-50{
+  width:50%
+}
+
+@media screen and (min-width: 769px){
+  .w-lg-50{
+  width:50%
+}
+}
+.form-control {
+    border-radius: 6px;
 }
 </style>
 
