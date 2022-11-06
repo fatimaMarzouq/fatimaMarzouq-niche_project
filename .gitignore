@@ -16,4 +16,3 @@ application/logs/*
 !application/logs/.htaccess
 /errors/
 */errors/
-images/sell_out_report

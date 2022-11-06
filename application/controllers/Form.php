@@ -311,10 +311,10 @@ class Form extends CI_Controller
                 if (!empty($_FILES)) {
                     $image_file_name = $_FILES['invoice_image']['name'];
                   
-                    list($msg, $flag, $imageUrl) = $this->upload_image("uploads/".$type, $_FILES, "invoice_image");
+                    list($msg, $flag, $imageUrl) = $this->upload_image("images/sell_out_report/".$type, $_FILES, "invoice_image");
                     if(!empty($flag) && empty($msg)){
                         $dataVal['image_url'] = $imageUrl;
-                        array_push($image_array,base_url()."uploads/".$imageUrl);
+                        array_push($image_array,base_url()."images/sell_out_report/".$imageUrl);
                     }
                 }
         $save_product= array(

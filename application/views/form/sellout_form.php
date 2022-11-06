@@ -9,7 +9,7 @@
     ?>
     <div class="top-padding">
       <div class="x_panel">       
-<form method="post" action="<?=site_url('form/add_sellout')?>" enctype="multipart/form-data">               
+<form method="post" action="<?=site_url('form/add_sellout')?>" onsubmit="return validateFile()" enctype="multipart/form-data">               
           
   <!-- <div class="x_title"> 
 <div class="clearfix"></div>
@@ -72,8 +72,9 @@
                             <?= $this->lang->line('invoice_image');?>
                             <span class="text-red">*</span>
                             <img id="blah" src="<?= site_url()?>images/camera-icon.png">
-                            <input type="file" class="form-control" name="invoice_image" id="invoice_image" style="display:none" required>
+                            <input type="file" class="form-control" name="invoice_image" id="invoice_image" style="display:none"  accept="image/*" required>
                           </label>
+                          <div class="text-red" id="img-error"></div>
                       </div>
                     </div>
                  <!-- <div>
@@ -285,7 +286,30 @@ function add_report_events(){
   })
 
   add_report_events();
+  $("#invoice_image").click(function(){
+    $("#img-error").text("");
+  });
 });
+function validateFile() 
+        {
+            var allowedExtension = ['jpeg', 'jpg', 'png', 'gif'];
+            var fileExtension = document.getElementById('invoice_image').value.split('.').pop().toLowerCase();
+            var isValidFile = false;
+
+                for(var index in allowedExtension) {
+
+                    if(fileExtension === allowedExtension[index]) {
+                        isValidFile = true; 
+                        break;
+                    }
+                }
+
+                if(!isValidFile) {
+                    $("#img-error").text('<?= $this->lang->line('allowed_types');?> :*.' + allowedExtension.join(', *.'));
+                }
+
+                return isValidFile;
+        }
 </script>
 
 

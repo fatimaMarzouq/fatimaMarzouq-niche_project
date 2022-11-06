@@ -45,3 +45,4 @@ $lang['ok'] = 'OK';
 
 $lang['add'] = 'Add';
 
+$lang['allowed_types']="Allowed types are";
