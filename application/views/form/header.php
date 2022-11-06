@@ -362,6 +362,9 @@ img#blah {
 .justify-content-around {
     justify-content: space-around;
 }
+.justify-content-end {
+    justify-content: flex-end;
+}
 .flex-column{
   flex-direction:column;
 }
@@ -376,6 +379,9 @@ img#blah {
 }
 .form-control {
     border-radius: 6px;
+}
+.text-red{
+  color: #eb0000;
 }
 </style>
 

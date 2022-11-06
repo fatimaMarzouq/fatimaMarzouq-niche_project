@@ -43,3 +43,5 @@ $lang['lang'] = 'العربية';
 $lang['newspapper'] = 'Newspapper from reporting manager';
 $lang['ok'] = 'OK';
 
+$lang['add'] = 'Add';
+

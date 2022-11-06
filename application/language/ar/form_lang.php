@@ -43,3 +43,4 @@ $lang['lang'] = 'English';
 $lang['newspapper'] = 'اعلانات';
 $lang['ok'] = 'موافق';
 
+$lang['add'] = 'اضافة';

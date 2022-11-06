@@ -1,4 +1,12 @@
 
+    <?php 
+    function random_chars($length = 5)
+    {
+        $chars      = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789";
+        $rand_chars = substr( str_shuffle( $chars ), 0, $length );
+        return $rand_chars;
+    }
+    ?>
     <div class="top-padding">
       <div class="x_panel">       
 <form method="post" action="<?=site_url('form/add_sellout')?>" enctype="multipart/form-data">               
@@ -37,14 +45,14 @@
                <div class="form-div d-flex flex-column gap-2">
                  
                  <div class="d-flex gap-2">
-                   <div class=" w-50"><?= $this->lang->line('name');?><input type="text" class="form-control" name="name"></div>
-                   <div class=" w-50"><?= $this->lang->line('contact_number');?><input type="text" class="form-control" name="contact_number"></div>
+                   <div class=" w-50"><label for="name" class="cate_one"><?= $this->lang->line('name');?> <span class="text-red">*</span></label><input type="text" class="form-control" name="name" id="name" required></div>
+                   <div class=" w-50"><label class="cate_one"><?= $this->lang->line('contact_number');?> <span class="text-red">*</span></label><input type="text" class="form-control" name="contact_number"  id="contact_number" required></div>
                  </div>
                  
                  <div class="d-flex flex-md-column gap-2">
-                    <div class="w-lg-50"><?= $this->lang->line('email');?><input type="email" class="form-control" name="email"></div>
+                    <div class="w-lg-50"><label class="cate_one"><?= $this->lang->line('email');?> <span class="text-red">*</span></label><input type="email" class="form-control" name="email" id="email" required></div>
                     <div class="w-lg-50">
-                      <?= $this->lang->line('user_sales');?>
+                      <label class="cate_one"><?= $this->lang->line('user_sales');?></label>
                       <input 
                       type="text"
                       class="form-control" 
@@ -56,14 +64,15 @@
                   </div>
                   <div class="d-flex gap-2 flex-md-column">
                       <div class="w-lg-50">
-                        <div class=""><?= $this->lang->line('customer_feed');?></div>
-                        <div class=""><textarea class="form-control" name="feedback" style="resize: none;"></textarea></div>
+                        <label  class="cate_one"><?= $this->lang->line('customer_feed');?> <span class="text-red">*</span></label>
+                        <div class=""><textarea class="form-control" name="feedback" id="feedback" style="resize: none;" required></textarea></div>
                       </div>
                       <div class="w-lg-50">
-                          <label for="invoice_image">
+                          <label for="invoice_image" class="cate_one">
                             <?= $this->lang->line('invoice_image');?>
+                            <span class="text-red">*</span>
                             <img id="blah" src="<?= site_url()?>images/camera-icon.png">
-                            <input type="file" class="form-control" name="invoice_image" id="invoice_image" style="display:none">
+                            <input type="file" class="form-control" name="invoice_image" id="invoice_image" style="display:none" required>
                           </label>
                       </div>
                     </div>
@@ -98,19 +107,14 @@
                </div>
                <h2 class="ditails_one"><?= $this->lang->line('sellout_report');?></h2>
  <div class="new_scro">
-<div class="form-div">
-  <div>
-    <div class="cate_one"><?= $this->lang->line('category');?></div>
-    <div class="cate_one"><?= $this->lang->line('brand');?></div>
-    <div class="cate_one"><?= $this->lang->line('model_number');?></div>
-    <div class="cate_one"><?= $this->lang->line('quantity');?></div>
-    <div class="cate_one"><?= $this->lang->line('selling_price');?></div>
-     <div class="cate_one"><?= $this->lang->line('offer_price');?></div>
-  </div>
-  <?php for($i=1;$i<=4;$i++){?>
-    <tr class="report">
-    <div>
-      <select class="form-control" name="category-<?php echo $i?>" id="category">
+<div id="report_container" class="form-div d-flex gap-2 flex-column">
+<?php $rand=random_chars(); ?>
+    
+    <div class="report d-flex gap-2 flex-column" id="report">
+      <input type="hidden" class="form-control" value="<?= $rand; ?>" name="reports_ids[]">
+      <div class="d-flex flex-column gap-2">
+      <div class=""><label class="cate_one"><?= $this->lang->line('category');?> <span class="text-red">*</span></label>
+      <select class="form-control" name="category-<?= $rand; ?>" id="category" required>
         <option value="" disabled selected><?= $this->lang->line('choose_category');?></option>
       <?php 
       if($categories) {
@@ -119,26 +123,34 @@
 
         }
       }
-    ?>
-    </select>
-  </div>
-    <div>
-      <select class="form-control" name="brand-<?php echo $i?>" id="brand">
+      ?>
+      </select>
+      </div>
+      <div class=""><label class="cate_one"><?= $this->lang->line('brand');?> <span class="text-red">*</span></label>
+      <select class="form-control" name="brand-<?= $rand?>" id="brand" required>
         <option value="" disabled selected><?= $this->lang->line('choose_brand');?></option>
-    </select>
-  </div>
-    <div>
-      <select class="form-control" name="model-<?php echo $i?>" id="model">
+      </select>
+      </div>
+      </div>
+      <div class="d-flex gap-2">
+      <div class="w-50"><label class="cate_one"><?= $this->lang->line('model_number');?> <span class="text-red">*</span></label>
+      <select class="form-control" name="model-<?= $rand ?>" id="model" required>
         <option value="" disabled selected><?= $this->lang->line('choose_model_number');?></option>
-    </select>
+      </select>
+      </div>
+  
+  
+      <div class="w-50"><label class="cate_one"><?= $this->lang->line('quantity');?> <span class="text-red">*</span></label><input type="number" class="form-control" min="0" step="1" name="quantity-<?= $rand; ?>" required></div>
+      </div>
+      <div class="d-flex gap-2">
+      <div class="w-50"><label class="cate_one"><?= $this->lang->line('selling_price');?> <span class="text-red">*</span></label><input type="number" class="form-control selling_price" min="0" step="0.01" name="selling_price-<?= $rand; ?>" required></div>
+      <div class="w-50"><label class="cate_one"><?= $this->lang->line('offer_price');?></label><input type="number" class="form-control" min="0" step="0.01" name="offer-<?= $rand; ?>"></div>
+      </div>
   </div>
-    <div><input type="number" class="form-control" min="0" step="1" name="quantity-<?php echo $i?>"></div>
-    <div><input type="number" class="form-control selling_price" min="0" step="0.01" name="selling_price-<?php echo $i?>"></div>
-    <div><input type="number" class="form-control" min="0" step="0.01" name="offer-<?php echo $i?>"></div>
-  </div>
-  <?php } ?>
   
 </div>
+<div class="center_one d-flex justify-content-end gap-2"><button type="button" class="new_button" id="add_report"><?= $this->lang->line('add');?></button></div>
+
 </div>
                <div class="d-flex justify-content-center">
                   <div class="center_one"><a href="<?= base_url() ?>form/sellout_list"><button type="submit" class="new_button" ><?= $this->lang->line('save');?></button></a></div>
@@ -161,8 +173,58 @@
   }
   $("#blah").css("width","224px")
 }
-  $( document ).ready(function() {
-    $( ".report" ).each(function(){
+function makeid(length=5) {
+    var result           = '';
+    var characters       = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+    var charactersLength = characters.length;
+    for ( var i = 0; i < length; i++ ) {
+        result += characters.charAt(Math.floor(Math.random() * charactersLength));
+    }
+    return result;
+}
+function create_report(){
+  let id=makeid();
+  let ele=`<div class="report d-flex gap-2 flex-column" id="report">
+      <input type="hidden" class="form-control" value="${id}" name="reports_ids[]">
+      <div class="d-flex flex-column gap-2">
+      <div class=""><label class="cate_one"><?= $this->lang->line('category');?> <span class="text-red">*</span></label>
+      <select class="form-control" name="category-${id}" id="category" required>
+        <option value="" disabled selected><?= $this->lang->line('choose_category');?></option>
+      <?php 
+      if($categories) {
+        foreach($categories as $category){
+      echo "<option name='".$category."'>".$category."</option>";
+
+        }
+      }
+      ?>
+      </select>
+      </div>
+      <div class=""><label class="cate_one"><?= $this->lang->line('brand');?> <span class="text-red">*</span></label>
+      <select class="form-control" name="brand-${id}" id="brand" required>
+        <option value="" disabled selected><?= $this->lang->line('choose_brand');?></option>
+      </select>
+      </div>
+      </div>
+      <div class="d-flex gap-2">
+      <div class="w-50"><label class="cate_one"><?= $this->lang->line('model_number');?> <span class="text-red">*</span></label>
+      <select class="form-control" name="model-${id}" id="model" required>
+        <option value="" disabled selected><?= $this->lang->line('choose_model_number');?></option>
+      </select>
+      </div>
+  
+  
+      <div class="w-50"><label class="cate_one"><?= $this->lang->line('quantity');?> <span class="text-red">*</span></label><input type="number" class="form-control" min="0" step="1" name="quantity-${id}" required></div>
+      </div>
+      <div class="d-flex gap-2">
+      <div class="w-50"><label class="cate_one"><?= $this->lang->line('selling_price');?> <span class="text-red">*</span></label><input type="number" class="form-control selling_price" min="0" step="0.01" name="selling_price-${id}" required></div>
+      <div class="w-50"><label class="cate_one"><?= $this->lang->line('offer_price');?></label><input type="number" class="form-control" min="0" step="0.01" name="offer-${id}"></div>
+      </div>
+  </div>`
+  return ele;
+}
+function add_report_events(){
+  $( ".report" ).each(function(){
       let parent=$(this)
       $(this).find("#category").change(function(){
         let category = $(this).val();
@@ -175,10 +237,14 @@
             },
             success: function(response) {
               parent.find('#brand').children().remove().end()
-                var brands = JSON.parse(response);
-                var ss = [];
+              parent.find('#model').children().remove().end()
+                var brands = JSON.parse(response)["brands"];
                 Object.keys(brands).forEach(key => {
                   parent.find('#brand').append('<option >' + brands[key]+ '</option>');
+                });
+                var models = JSON.parse(response)["models"];
+                Object.keys(models).forEach(key => {
+                  parent.find('#model').append('<option >' + models[key]+ '</option>');
                 });
             }
         });
@@ -195,7 +261,6 @@
             success: function(response) {
               parent.find('#model').children().remove().end()
                 var models = JSON.parse(response);
-                var ss = [];
                 Object.keys(models).forEach(key => {
                   parent.find('#model').append('<option >' + models[key]+ '</option>');
                 });
@@ -212,6 +277,14 @@
   $("#analysis_per").val(tot/Number($("#user_target").val())) 
 
 });
+}
+  $( document ).ready(function() {
+    $("#add_report").click(function(){
+    $('#report_container').append( $(create_report()) );
+    add_report_events();
+  })
+
+  add_report_events();
 });
 </script>
 

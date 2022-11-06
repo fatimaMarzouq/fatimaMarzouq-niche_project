@@ -267,8 +267,8 @@ class Form extends CI_Controller
     public function get_brand(){
         $category=$_POST["category"];
         $brands= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "brand_name", array('category' => $category)), 'brand_name'));
-
-        echo json_encode($brands);
+        $models= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "model_number", array('brand_name' => $brands[0])), 'model_number'));
+        echo json_encode(["brands"=>$brands,"models"=>$models]);
     }
     public function get_model(){
         $brand=$_POST["brand"];
@@ -291,16 +291,17 @@ class Form extends CI_Controller
         $add_more_array=array();
         $user_id = $this->session->userdata('id');
         $username=$this->session->userdata('username');
-        for($i=1;$i<=4;$i++){
-            if(isset($_POST["category"."-".$i])){
+        $reports_ids=$_POST["reports_ids"];
+        foreach($reports_ids as $report_id){
+            if(isset($_POST["category"."-".$report_id])){
                 array_push($add_more_array,
             [
-                "category"=>$_POST["category"."-".$i],
-                "brand"=>$_POST["brand"."-".$i],
-                "model"=>$_POST["model"."-".$i],
-                "quantity"=>$_POST["quantity"."-".$i],
-                "selling_price"=>$_POST["selling_price"."-".$i],
-                "offer"=>$_POST["offer"."-".$i],
+                "category"=>$_POST["category"."-".$report_id],
+                "brand"=>$_POST["brand"."-".$report_id],
+                "model"=>$_POST["model"."-".$report_id],
+                "quantity"=>$_POST["quantity"."-".$report_id],
+                "selling_price"=>$_POST["selling_price"."-".$report_id],
+                "offer"=>$_POST["offer"."-".$report_id],
             ]
         );
             }
