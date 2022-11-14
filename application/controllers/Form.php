@@ -90,9 +90,9 @@ class Form extends CI_Controller
 		{
 
 
-
+// $result[0]->role != 2 && 
 			$result=$query->result();
-            if($result[0]->role != 2 && $result[0]->type == 1){
+            if($result[0]->type == 1){
     			$sessiondata = array(
     
     									'id'  =>$result[0]->id,
