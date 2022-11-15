@@ -202,12 +202,11 @@ class Form extends CI_Controller
             $data['max_count'] = 0;
         }
 
-        $select = "id,outlet_name,account_name,region,date,visit_status,(select longitude from tbl_outlet_master where outlet_name=tbl_masterdata3.outlet_name) as longitude,(select latitude from tbl_outlet_master where outlet_name=tbl_masterdata3.outlet_name) as latitude";
+        $select = "id,outlet_name,account_name,region,visit_status,(select longitude from tbl_outlet_master where outlet_name=tbl_masterdata3.outlet_name) as longitude,(select latitude from tbl_outlet_master where outlet_name=tbl_masterdata3.outlet_name) as latitude";
         $table = 'tbl_masterdata3';
         $con = "1=1 and `user` in ('" . $this->session->userdata('email')."','". $this->session->userdata('username') . "') ";
-        $invoice_data_val = $this->Common_model->getPaginationList($start, $table, $select, $con, $orderBy, $limit);
-
-        $invoice_total = $this->Common_model->getData($table, $select, $con, $orderBy, null, null);
+        $invoice_data_val = array_unique($this->Common_model->getPaginationList($start, $table, $select, $con, $orderBy, $limit));
+        $invoice_total = array_unique($this->Common_model->getData($table, $select, $con, $orderBy, null, null));
         // echo $this->db->last_query();
         $count_invoice = 0;
         if (!empty($invoice_total)) {
@@ -240,7 +239,7 @@ class Form extends CI_Controller
         $row = $this->Common_model->getData("tbl_masterdata3", "outlet_name", array('id' => $id));
         $select = "*";
         $table = "sellout";
-        $con = array('outlet_name' => $row[0]["outlet_name"]);
+        $con = array('outlet_name' => $row[0]["outlet_name"],'user_id' =>  $this->session->userdata('id'));
         $result = $this->Common_model->getData($table, $select, $con, NULL, null, null,null,false);
         
         $data['result']=$result;
@@ -368,4 +367,42 @@ class Form extends CI_Controller
         }
         redirect(($_SERVER['HTTP_REFERER']));
     }
+
+//     public function removeDup(){
+// //         SELECT DISTINCT [col1],[col2],[col3],[col4],[col5],[col6],[col7]
+
+// // INTO [newTable]
+
+// // FROM [oldTable]
+//  $query =$this->db->select("outlet_name,region,user,account_name,visit_status,unique_code")->distinct()->from("tbl_masterdata3")->get();
+        
+//         foreach($query->result_array() as $row){
+//             echo "<pre>";
+//             print_r($this->db->select("*")->from("tbl_masterdata3")->where(
+//                 array(
+//                     "outlet_name"=>$row["outlet_name"],
+//                     "region"=>$row["region"],
+//                     "user"=>$row["user"],
+//                     "account_name"=>$row["account_name"],
+//                     "visit_status"=>$row["visit_status"],
+//                     "unique_code"=>$row["unique_code"],
+//                 ))->get()->result_array()[0]);
+//             echo "</pre>";
+//     $insert = $this->db->insert('tbl_masterdata3_unique', 
+//     $this->db->select("*")->from("tbl_masterdata3")->where(
+//         array(
+//             "outlet_name"=>$row["outlet_name"],
+//             "region"=>$row["region"],
+//             "user"=>$row["user"],
+//             "account_name"=>$row["account_name"],
+//             "visit_status"=>$row["visit_status"],
+//             "unique_code"=>$row["unique_code"],
+//         ))->get()->result_array()[0]);
+
+//         }
+//     // $insert = $this->db->insert_batch('tbl_masterdata3_unique', $query->result_array());
+
+    
+
+//     }
 }

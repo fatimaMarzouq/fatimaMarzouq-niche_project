@@ -111,8 +111,8 @@
 <div id="report_container" class="form-div d-flex gap-2 flex-column">
 <?php $rand=random_chars(); ?>
     
-    <div class="report d-flex gap-2 flex-column" id="report">
-      <input type="hidden" class="form-control" value="<?= $rand; ?>" name="reports_ids[]">
+    <div class="report d-flex gap-2 flex-column" id="report-<?= $rand; ?>">
+      <input type="hidden" class="form-control" id="report_id" value="<?= $rand; ?>" name="reports_ids[]">
       <div class="d-flex flex-column gap-2">
       <div class=""><label class="cate_one"><?= $this->lang->line('category');?> <span class="text-red">*</span></label>
       <select class="form-control" name="category-<?= $rand; ?>" id="category" required>
@@ -147,6 +147,7 @@
       <div class="w-50"><label class="cate_one"><?= $this->lang->line('selling_price');?> <span class="text-red">*</span></label><input type="number" class="form-control selling_price" min="0" step="0.01" name="selling_price-<?= $rand; ?>" required></div>
       <div class="w-50"><label class="cate_one"><?= $this->lang->line('offer_price');?></label><input type="number" class="form-control" min="0" step="0.01" name="offer-<?= $rand; ?>"></div>
       </div>
+      <button type="button" class="new_button remove_report"  id="<?= $rand ?>" style="opacity:0.5" disabled><?= $this->lang->line('remove');?></button>
   </div>
   
 </div>
@@ -185,8 +186,8 @@ function makeid(length=5) {
 }
 function create_report(){
   let id=makeid();
-  let ele=`<div class="report d-flex gap-2 flex-column" id="report">
-      <input type="hidden" class="form-control" value="${id}" name="reports_ids[]">
+  let ele=`<div class="report d-flex gap-2 flex-column" id="report-${id}">
+      <input type="hidden" class="form-control" id="report_id" value="${id}" name="reports_ids[]">
       <div class="d-flex flex-column gap-2">
       <div class=""><label class="cate_one"><?= $this->lang->line('category');?> <span class="text-red">*</span></label>
       <select class="form-control" name="category-${id}" id="category" required>
@@ -221,6 +222,7 @@ function create_report(){
       <div class="w-50"><label class="cate_one"><?= $this->lang->line('selling_price');?> <span class="text-red">*</span></label><input type="number" class="form-control selling_price" min="0" step="0.01" name="selling_price-${id}" required></div>
       <div class="w-50"><label class="cate_one"><?= $this->lang->line('offer_price');?></label><input type="number" class="form-control" min="0" step="0.01" name="offer-${id}"></div>
       </div>
+      <button type="button" class="new_button remove_report"  id="${id}"><?= $this->lang->line('remove');?></button>
   </div>`
   return ele;
 }
@@ -281,6 +283,9 @@ function add_report_events(){
   $("#analysis_per").val(tot/Number($("#user_target").val())) 
 
 });
+$(".remove_report").click(function(){
+    $("#report-"+ $(this).attr("id")).remove();
+  });
 }
   $( document ).ready(function() {
     $("#add_report").click(function(){

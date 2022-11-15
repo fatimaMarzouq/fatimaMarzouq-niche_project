@@ -46,4 +46,5 @@ $lang['ok'] = 'موافق';
 $lang['add'] = 'اضافة';
 
 $lang['allowed_types']="الانواع المسموحة";
+$lang['remove']="مسح";
 
