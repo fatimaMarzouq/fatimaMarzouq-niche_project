@@ -266,8 +266,9 @@ class Form extends CI_Controller
     }
     public function get_brand(){
         $category=$_POST["category"];
-        $brands= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "brand_name", array('category' => $category)), 'brand_name'));
-        $models= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "model_number", array('brand_name' => $brands[0])), 'model_number'));
+        // $brands= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "brand_name", array('category' => $category)), 'brand_name'));
+        $brands= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "brand_name", 'category = "'.$category.'" and brand_name="ELECTROLUX" or brand_name ="FRIGIDAIRE"'), 'brand_name'));
+        $models= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "model_number", array('category' => $category,'brand_name' => $brands[0])), 'model_number'));
         echo json_encode(["brands"=>$brands,"models"=>$models]);
     }
     public function get_model(){

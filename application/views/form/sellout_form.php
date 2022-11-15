@@ -252,12 +252,15 @@ function add_report_events(){
       });
       $(this).find("#brand").change(function(){
         let brand = $(this).val();
+        let category = parent.find("#category").val();
+
         $.ajax({
             url: "<?= base_url() ?>form/get_model",
             method: 'POST',
             data: {
                 // "_token": $('#csrftoken').val(),
-                brand: brand
+                brand: brand,
+                category:category
             },
             success: function(response) {
               parent.find('#model').children().remove().end()
