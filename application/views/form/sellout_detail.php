@@ -345,6 +345,7 @@ function validateFile()
   $('#invoice_image').on("change", function(){ validateFile(); });
   $("#invoice_image").click(function(){
     $("#img-error").text("");
+    $("form").unbind('submit');
   });
 });
 
