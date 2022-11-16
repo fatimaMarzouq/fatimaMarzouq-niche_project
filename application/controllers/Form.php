@@ -241,9 +241,12 @@ class Form extends CI_Controller
         $table = "sellout";
         $con = array('outlet_name' => $row[0]["outlet_name"],'user_id' =>  $this->session->userdata('id'));
         $result = $this->Common_model->getData($table, $select, $con, NULL, null, null,null,false);
-        
+        $unique_values_by_key = array_unique(array_column($this->Common_model->getData("tbl_masterdata", "category"), 'category'));
+        $data['categories']=$unique_values_by_key;
         $data['result']=$result;
+        $data['user_target']=$this->Common_model->getData("tbl_admin", "target", array('id' => $this->session->userdata('id')), null, null, null, null, false)["target"];
         $data['main']='form/sellout_detail';
+        $data["id"]=$id;
         $this->load->view('form/template',$data); 	
     }
     public function sellout_form()
@@ -357,6 +360,59 @@ class Form extends CI_Controller
         ),"tbl_masterdata3",$_POST["id"]);
 		redirect('form/sellout_detail/'.$_POST["id"]);
     }
+    
+    public function update_sellout(){
+        $name=$_POST["name"];
+        $number=$_POST["contact_number"];
+        $email=$_POST["email"];
+        $customer_feed=$_POST["feedback"];
+        $user_sale=$_POST["user_sale"];
+        $analysis_per=$_POST["analysis_per"];
+        $add_more_array=array();
+        $reports_ids=$_POST["reports_ids"];
+        foreach($reports_ids as $report_id){
+            if(isset($_POST["category"."-".$report_id])){
+                array_push($add_more_array,
+            [
+                "category"=>$_POST["category"."-".$report_id],
+                "brand"=>$_POST["brand"."-".$report_id],
+                "model"=>$_POST["model"."-".$report_id],
+                "quantity"=>$_POST["quantity"."-".$report_id],
+                "selling_price"=>$_POST["selling_price"."-".$report_id],
+                "offer"=>$_POST["offer"."-".$report_id],
+            ]
+        );
+            }
+            
+        }
+                $image_array = array();
+                if (!empty($_FILES)) {
+                    $image_file_name = $_FILES['invoice_image']['name'];
+                  
+                    list($msg, $flag, $imageUrl) = $this->upload_image("images/sell_out_report/".$type, $_FILES, "invoice_image");
+                    if(!empty($flag) && empty($msg)){
+                        $dataVal['image_url'] = $imageUrl;
+                        array_push($image_array,base_url()."images/sell_out_report/".$imageUrl);
+                    }
+                }
+        $save_product= array(
+            'date'                 => $this->current_date_time,
+            'name'                 => $name,
+            'number'               => $number,     
+            'email'                => $email,
+            'customer_feed'        => $customer_feed,
+            'user_sale'            => $user_sale,
+            'analysis_per'         => $analysis_per,       
+            'add_more_array'       => base64_encode(serialize($add_more_array)),
+            'add_more_array_count' => count($add_more_array),
+        );
+        if(!empty($image_array)){
+            $save_product['image_array']=base64_encode(serialize($image_array));
+        }
+        $result=$this->Common_model->update_data($save_product,"sellout",$_POST["sellout_id"]);
+		redirect('form/sellout_detail/'.$_POST["id"]);
+    }
+
     public function switch_language(){
         $language = $this->session->userdata('language');
         if($language=="en"){
