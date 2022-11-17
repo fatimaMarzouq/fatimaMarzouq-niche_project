@@ -18,7 +18,6 @@
                   <th class="sortable" id="outlet_name"><?= $this->lang->line('outlet_name');?></th>
                   <th class="sortable" id="region"><?= $this->lang->line('region');?></th>
                   <th class="sortable" id="name"><?= $this->lang->line('name');?></th>
-                  <th><?= $this->lang->line('visit_status');?></th>     
                </tr>
             </thead>
            
@@ -41,7 +40,6 @@
               <td><?php echo $row['outlet_name'] ? $row['outlet_name']: '-'; ?></td>
               <td><?php echo $row['region'] ? $row['region'] : '-'; ?></td>
               <td><?php echo $row['account_name']; ?></td>
-              <td><?php if($row['visit_status']=="Visited") echo $this->lang->line('visited'); else echo $this->lang->line('pending'); ?></td>
                  <input type="hidden" name="longitude" value="<?php echo $row['longitude'];?>">
                  <input type="hidden" name="latitude" value="<?php echo $row['latitude'];?>">
                  <input type="hidden" name="status" value="<?php echo $row['visit_status'];?>">

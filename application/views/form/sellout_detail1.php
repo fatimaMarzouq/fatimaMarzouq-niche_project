@@ -99,7 +99,10 @@
         foreach($add_more_array as $result){
             // $result = json_decode($resultm,true);
             //echo '<pre>';print_r($add_more_ar);
-           
+            if (is_object(json_decode($result))) { 
+              $result = json_decode($result,true);
+              
+            }
             ?>
   <tr>
     <td><?php if($result['category']) echo $result['category'];?></td>
