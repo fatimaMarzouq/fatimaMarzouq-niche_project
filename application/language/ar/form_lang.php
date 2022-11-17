@@ -48,3 +48,4 @@ $lang['add'] = 'اضافة';
 $lang['allowed_types']="الانواع المسموحة";
 $lang['remove']="مسح";
 
+$lang['required_field']="هذا الحقل مطلوب";

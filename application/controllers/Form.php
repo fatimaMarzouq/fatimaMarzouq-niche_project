@@ -90,7 +90,7 @@ class Form extends CI_Controller
 		{
 
 
-// $result[0]->role != 2 && 
+// $result[0]->role != 2 &&
 			$result=$query->result();
             if($result[0]->type == 1){
     			$sessiondata = array(
@@ -259,7 +259,7 @@ class Form extends CI_Controller
         $result = $this->Common_model->getData($table, $select, $con, null, null, null, null, false);
         $result['date']= date("Y-m-d H:i:s");
         $data['result'] = $result;
-        $unique_values_by_key = array_unique(array_column($this->Common_model->getData("tbl_masterdata", "category"), 'category'));
+        $unique_values_by_key = array_unique(array_column($this->Common_model->getData("tbl_masterdata", "category",array("menu_name"=>"SELLOUT_REPORT") , "category asc"), 'category'));
         $data['categories']=$unique_values_by_key;
         $data['user_target']=$this->Common_model->getData("tbl_admin", "target", array('id' => $this->session->userdata('id')), null, null, null, null, false)["target"];
         $data['main'] = 'form/sellout_form';
@@ -268,15 +268,14 @@ class Form extends CI_Controller
     }
     public function get_brand(){
         $category=$_POST["category"];
-        // $brands= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "brand_name", array('category' => $category)), 'brand_name'));
-        $brands= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "brand_name", 'category = "'.$category.'" and brand_name="ELECTROLUX" or brand_name ="FRIGIDAIRE"'), 'brand_name'));
+        $brands= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "brand_name", 'category = "'.$category.'" and menu_name="SELLOUT_REPORT" and (brand_name="ELECTROLUX" or brand_name ="FRIGIDAIRE")'), 'brand_name'));
         $models= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "model_number", array('category' => $category,'brand_name' => $brands[0])), 'model_number'));
         echo json_encode(["brands"=>$brands,"models"=>$models]);
     }
     public function get_model(){
         $brand=$_POST["brand"];
         $category=$_POST["category"];
-        $models= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "model_number", array('brand_name' => $brand)), 'model_number'));
+        $models= array_unique(array_column($this->Common_model->getData("tbl_masterdata", "model_number", array('category' => $category,'brand_name' => $brand,"menu_name"=>"SELLOUT_REPORT")), 'model_number'));
 
         echo json_encode($models);
     }
@@ -352,15 +351,17 @@ class Form extends CI_Controller
            'account_name' => $account_name
         );
 
+		
+        
+        if ($this->db->insert('sellout',$save_product)) {
+            $insert_id = $this->db->insert_id();
+            $this->session->set_flashdata('success_msg', "Data Saved successfully");
 
-        $this->db->insert('sellout',$save_product);
-		$insert_id = $this->db->insert_id();
-        $result=$this->Common_model->update_data(array(
-            'visit_status'    => "Visited",
-        ),"tbl_masterdata3",$_POST["id"]);
-		redirect('form/sellout_detail/'.$_POST["id"]);
+        } else {
+            $this->session->set_flashdata('failed_msg', 'Failed data Save');
+        }
+		redirect('form/sellout_form/'.$_POST["id"]);
     }
-    
     public function update_sellout(){
         $name=$_POST["name"];
         $number=$_POST["contact_number"];
@@ -412,7 +413,6 @@ class Form extends CI_Controller
         $result=$this->Common_model->update_data($save_product,"sellout",$_POST["sellout_id"]);
 		redirect('form/sellout_detail/'.$_POST["id"]);
     }
-
     public function switch_language(){
         $language = $this->session->userdata('language');
         if($language=="en"){
@@ -423,7 +423,7 @@ class Form extends CI_Controller
         }
         redirect(($_SERVER['HTTP_REFERER']));
     }
-
+    
 //     public function removeDup(){
 // //         SELECT DISTINCT [col1],[col2],[col3],[col4],[col5],[col6],[col7]
 

@@ -7,8 +7,31 @@
         return $rand_chars;
     }
     ?>
+ 
     <div class="top-padding">
-      <div class="x_panel">       
+    
+      <div class="x_panel">
+        <div class="col-sm-12" style="margin-bottom:25px;">
+                <?php 
+                    if(!$this->session->flashdata('success_msg')==''){  ?>
+                       <center>   
+                            <div class="alert alert-success alert-dismissable">
+                                <a href="" class="close" data-dismiss="alert" aria-label="close">x</a>
+                                <h4>  <?php  echo $this->session->flashdata('success_msg'); ?></h4>
+                            </div>
+                        </center>
+                <?php } ?>
+
+                <?php 
+                if(!$this->session->flashdata('failed_msg')==''){  ?>
+                    <center>   
+                        <div class="alert alert-danger alert-dismissable">
+                            <a href="" class="close" data-dismiss="alert" aria-label="close">x</a>
+                            <h4>  <?php  echo $this->session->flashdata('failed_msg'); ?></h4>
+                        </div>
+                    </center>
+                <?php } ?>
+            </div>       
 <form method="post" action="<?=site_url('form/add_sellout')?>" onsubmit="return validateFile()" enctype="multipart/form-data">               
           
   <!-- <div class="x_title"> 
@@ -72,7 +95,7 @@
                             <?= $this->lang->line('invoice_image');?>
                             <span class="text-red">*</span>
                             <img id="blah" src="<?= site_url()?>images/camera-icon.png">
-                            <input type="file" class="form-control" name="invoice_image" id="invoice_image" style="display:none"  accept="image/*" required>
+                            <input type="file" class="form-control" name="invoice_image" id="invoice_image" style="display:none"  accept="image/*" >
                           </label>
                           <div class="text-red" id="img-error"></div>
                       </div>
@@ -297,13 +320,22 @@ $(".remove_report").click(function(){
   $("#invoice_image").click(function(){
     $("#img-error").text("");
   });
+  
+const myTimeout = setTimeout(function() {
+  <?php
+  $this->session->set_flashdata('success_msg', '');
+  $this->session->set_flashdata('failed_msg', '');
+  ?>
+
+}, 1000);
 });
 function validateFile() 
         {
+          
             var allowedExtension = ['jpeg', 'jpg', 'png', 'gif'];
             var fileExtension = document.getElementById('invoice_image').value.split('.').pop().toLowerCase();
             var isValidFile = false;
-
+            
                 for(var index in allowedExtension) {
 
                     if(fileExtension === allowedExtension[index]) {
@@ -311,11 +343,14 @@ function validateFile()
                         break;
                     }
                 }
+                
 
                 if(!isValidFile) {
                     $("#img-error").text('<?= $this->lang->line('allowed_types');?> :*.' + allowedExtension.join(', *.'));
                 }
-
+                if(!document.getElementById('invoice_image').value){
+                  $("#img-error").text('<?= $this->lang->line('required_field');?>.');
+                }
                 return isValidFile;
         }
 </script>

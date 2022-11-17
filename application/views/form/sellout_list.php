@@ -29,9 +29,9 @@
             <tr class="custom-tr">
               <td style="position:relative">
               <div id="disabled-overlay"></div>
-                <a href="<?php if($row['visit_status']=="Visited") 
-                echo base_url()."form/sellout_detail/".$row['id'];
-              else
+                <a href="<?php //if($row['visit_status']=="Visited") 
+                //echo base_url()."form/sellout_detail/".$row['id'];
+              //else
               echo base_url()."form/sellout_form/".$row['id'];
               ?>"  
               >

@@ -47,3 +47,5 @@ $lang['add'] = 'Add';
 
 $lang['allowed_types']="Allowed types are";
 $lang['remove']="Remove";
+$lang['required_field']="This is a required field";
+
